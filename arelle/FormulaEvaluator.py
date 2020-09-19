@@ -785,18 +785,28 @@ def aspectMatches(xpCtx, fact1, fact2, aspect):
             # else if both are None, matches True for single and multiple instance
     return True
 
+# def replaced by faster version (only for EIOPA and FTK)
 def factsPartitions(xpCtx, facts, aspects):
-    factsPartitions = []
+    contexts_dict = dict()
     for fact in facts:
-        matched = False
-        for partition in factsPartitions:
-            if aspectsMatch(xpCtx, fact, partition[0], aspects):
-                partition.append(fact)
-                matched = True
-                break
-        if not matched:
-            factsPartitions.append([fact,])
-    return factsPartitions
+        if fact.context not in contexts_dict.keys():
+            contexts_dict[fact.context] = [fact]
+        else:
+            contexts_dict[fact.context].append(fact)
+    return list(contexts_dict.values())
+
+# def factsPartitions(xpCtx, facts, aspects):
+#     factsPartitions = []
+#     for fact in facts:
+#         matched = False
+#         for partition in factsPartitions:
+#             if aspectsMatch(xpCtx, fact, partition[0], aspects):
+#                 partition.append(fact)
+#                 matched = True
+#                 break
+#         if not matched:
+#             factsPartitions.append([fact,])
+#     return factsPartitions
 
 def evaluationIsUnnecessary(thisEval, xpCtx):
     otherEvals = xpCtx.evaluations
