@@ -4,7 +4,7 @@ setup(
   name = 'dnb-arelle',
   packages = ['arelle'], 
   package_data = {'arelle': ['arelle/*', 'pyparsing/*']},
-  version = '1.0.0',
+  version = '0.1.0',
   description = 'Arelle modified by DeNederlandscheBank',
   author="De Nederlandsche Bank",
   author_email='ECDB_berichten@dnb.nl',
